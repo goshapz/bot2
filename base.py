@@ -18,7 +18,7 @@ conn = psycopg2.connect(database=db,
 cursor = conn.cursor()
 
 
-def register_user(a: object, b: object, c: object) -> object:
+def register_user(a, b, c):
     username = (a + ' ' + b)
     cursor.execute("SELECT * from telusers WHERE chat_id =%s", (str(c),))
     records = list(cursor.fetchall())
