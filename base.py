@@ -36,6 +36,14 @@ def subj_time(a):
         a = a + 'В'
         return return_timetable(a)
 
+def subj_nexttime(a):
+    if date.get_week() == 'Неделя - нижняя':
+        a = a + 'В'
+        return return_timetable(a)
+    else:
+        a = a + 'Н'
+        return return_timetable(a)
+
 
 def return_teacher(a):
     cursor.execute("SELECT full_name from teacher WHERE subject=%s", (str(a),))
@@ -47,6 +55,15 @@ def return_len(a):
     if date.get_week() == 'Неделя - нижняя':
         cursor.execute("SELECT count(*) from timetable WHERE day=%s", (str(a + 'Н'),))
     if date.get_week() == 'Неделя - верхняя':
+        cursor.execute("SELECT  count(*) from timetable WHERE day=%s", (str(a + 'В'),))
+    records = str(cursor.fetchone())
+    return records
+
+
+def return_nextlen(a):
+    if date.get_nextweek() == 'Неделя - нижняя':
+        cursor.execute("SELECT count(*) from timetable WHERE day=%s", (str(a + 'Н'),))
+    if date.get_nextweek() == 'Неделя - верхняя':
         cursor.execute("SELECT  count(*) from timetable WHERE day=%s", (str(a + 'В'),))
     records = str(cursor.fetchone())
     return records
