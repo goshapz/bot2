@@ -7,5 +7,4 @@ def get_week():
     d1 = sep - timedelta(days=sep.weekday())
     d2 = now - timedelta(days=now.weekday())
     parity = ((d2 - d1).days // 7) % 2
-
     return "Неделя - {}".format("нижняя" if parity else "верхняя")
